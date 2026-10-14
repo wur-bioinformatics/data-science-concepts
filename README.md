@@ -13,7 +13,7 @@ The notebooks are meant to be used in [Google Colab](https://colab.research.goog
 | 3 - Data exploration I | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block3_exploration_1/tutorial_3.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block3_exploration_1/project_3.ipynb) |
 | 4 - Data exploration II | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block4_exploration_2/tutorial_4.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block4_exploration_2/project_4.ipynb) |
 
-The notebooks read datasets directly from this repository on GitHub (`DATA_URL` in the notebooks), so no downloading or uploading is needed for the course datasets. Note that this points to the `main` branch: files that are not on `main` yet will not load.
+In blocks 1 and 2, students download the datasets from Kaggle themselves and upload them to Colab (`files.upload()`). From block 3 onwards, the notebooks read datasets directly from this repository on GitHub (`DATA_URL` in the notebooks). Note that this points to the `main` branch: files that are not on `main` yet will not load.
 
 ### Repository structure
 
