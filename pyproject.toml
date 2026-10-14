@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "data-science-concepts"
+dynamic = ["version"]
+description = "Helper functions for the Concepts in Data Science practicals (Wageningen University)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+# No version bounds: installing the package in Colab should not change the preinstalled packages
+dependencies = ["numpy", "matplotlib", "seaborn", "scikit-learn", "plotly"]
+
+[project.urls]
+Repository = "https://github.com/wur-bioinformatics/data-science-concepts"
+
+# Version is taken from the git tag of the release (e.g. v2026.0.0)
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/data_science_concepts"]

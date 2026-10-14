@@ -11,6 +11,7 @@ Remaining work after the move to Colab (renaming, `DATA_URL` data loading, helpe
 
 ## Before the course starts
 
+- [ ] PyPI: add a pending trusted publisher for `data-science-concepts` (owner `wur-bioinformatics`, repository `data-science-concepts`, workflow `package.yml`, environment `pypi`), create the `pypi` environment in the GitHub repository settings, and publish release `v2026.0.0`. Tutorials 3 and 4 install the package, so they fail until this release exists.
 - [ ] Merge to `main`: notebooks read data and images from the `main` branch, so new files (`iris.csv`, `automobile.csv`, `breast-cancer.csv`, moved images) only load after merging.
 - [ ] Open every notebook via the README links in a real Colab session and run it top to bottom.
 
@@ -53,11 +54,11 @@ Part 1 describes Jupyter/JupyterHub and no longer matches what students see.
 ## Repo housekeeping
 
 - [ ] `requirements.txt` does not install: `sklearn` should be `scikit-learn`, the `matplotlib == 3.1.0` pin is outdated, `wget` is not needed; add `plotnine` and `openpyxl` if kept. Only relevant for local use.
-- [ ] `.gitignore`: add `pca_example.py` at the notebook level if people run notebooks locally (Tutorial 3 downloads it into the working directory).
 - [ ] Optional: GitHub Action that executes all notebooks (e.g. with `nbclient`) on every push and on a schedule, to catch breakage from library updates in Colab.
 
 ## Larger content changes (later)
 
+- [ ] Course package: consider a `plot_regression_diagnostics(y, y_pred)` helper for the predicted vs. true / residuals / residual histogram plot that is repeated 7 times in Tutorial 4 (trade-off: students no longer see the plotting code).
 - [ ] Add references to Skiena, *The Data Science Design Manual*, per section. Currently only Tutorials 1 and 2 cite the book. Rough mapping: correlation (ch. 2), visualisation (ch. 6), models and evaluation (ch. 7), PCA/SVD (ch. 8), regression (ch. 9), distances, clustering and nearest neighbours (ch. 10), decision trees and neural networks (ch. 11).
 - [ ] Tutorial 4 covers regression, classification, evaluation and deep learning (~2h45); consider splitting.
 - [ ] Deep learning section: deepart.io is offline, the GPT-2 blog post (2019) is dated. Update the examples.

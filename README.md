@@ -44,10 +44,21 @@ Notebooks with exercises and examples are in the `notebooks` folder, with one su
 |   `-- block4_exploration_2
 |       |-- tutorial_4.ipynb
 |       `-- project_4.ipynb
+|-- pyproject.toml
 |-- requirements.txt
-`-- util
-    |-- __init__.py
-    `-- pca_example.py      (downloaded by tutorial 3)
+`-- src
+    `-- data_science_concepts   (course package, see below)
 ```
 
 Images used in the notebooks are stored next to the notebooks and linked by their GitHub URL, because Colab does not resolve relative image paths.
+
+### Course package
+
+Helper functions used in the notebooks (e.g. `plot_decision_boundary`) are in the `data-science-concepts` package in `src/data_science_concepts`. The notebooks install it with
+
+```python
+%pip install -q "data-science-concepts==2026.*"
+import data_science_concepts as dsc
+```
+
+To release a new version, create a GitHub release with a tag of the form `vYEAR.MINOR.PATCH` (e.g. `v2026.0.1`). The `Package` workflow (`.github/workflows/package.yml`) builds the package and publishes it to [PyPI](https://pypi.org/project/data-science-concepts/); the version number is taken from the tag. Notebooks pin the course year, so a release for the next year (`v2027.0.0`) does not affect notebooks of the current year.
