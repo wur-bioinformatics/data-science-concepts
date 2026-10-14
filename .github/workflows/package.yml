@@ -1,0 +1,54 @@
+# Builds the data-science-concepts package on changes, and publishes it to PyPI
+# when a GitHub release is published. The version is taken from the release tag
+# (e.g. v2026.0.0). Publishing uses PyPI trusted publishing, so no API token is needed.
+name: Package
+
+on:
+  push:
+    branches: [main]
+    paths: [src/**, pyproject.toml, .github/workflows/package.yml]
+  pull_request:
+    paths: [src/**, pyproject.toml, .github/workflows/package.yml]
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0  # tags are needed to determine the version
+      - uses: astral-sh/setup-uv@v10.3.0  # setup-uv only publishes full version tags
+      - run: uv build
+      - name: Test the built package
+        run: |
+          uv run --isolated --no-project --with dist/*.whl python -c "
+          import pandas as pd
+          from sklearn.datasets import make_moons
+          from sklearn.neighbors import KNeighborsClassifier
+          import data_science_concepts as dsc
+          print(dsc.__version__)
+          dsc.make_pca_example_figure()
+          X, y = make_moons(random_state=0)
+          X = pd.DataFrame(X, columns=['feature_1', 'feature_2'])
+          dsc.plot_decision_boundary(X, y, ['feature_1', 'feature_2'], KNeighborsClassifier().fit(X.values, y))
+          "
+      - uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@v1.14.2

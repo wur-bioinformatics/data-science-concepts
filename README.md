@@ -13,7 +13,7 @@ The notebooks are meant to be used in [Google Colab](https://colab.research.goog
 | 3 - Data exploration I | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block3_exploration_1/tutorial_3.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block3_exploration_1/project_3.ipynb) |
 | 4 - Data exploration II | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block4_exploration_2/tutorial_4.ipynb) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/wur-bioinformatics/data-science-concepts/blob/main/notebooks/block4_exploration_2/project_4.ipynb) |
 
-The notebooks read datasets directly from this repository on GitHub (`DATA_URL` in the notebooks), so no downloading or uploading is needed for the course datasets. Note that this points to the `main` branch: files that are not on `main` yet will not load.
+In blocks 1 and 2, students download the datasets from Kaggle themselves and upload them to Colab (`files.upload()`). From block 3 onwards, the notebooks read datasets directly from this repository on GitHub (`DATA_URL` in the notebooks). Note that this points to the `main` branch: files that are not on `main` yet will not load.
 
 ### Repository structure
 
@@ -44,10 +44,21 @@ Notebooks with exercises and examples are in the `notebooks` folder, with one su
 |   `-- block4_exploration_2
 |       |-- tutorial_4.ipynb
 |       `-- project_4.ipynb
+|-- pyproject.toml
 |-- requirements.txt
-`-- util
-    |-- __init__.py
-    `-- pca_example.py      (downloaded by tutorial 3)
+`-- src
+    `-- data_science_concepts   (course package, see below)
 ```
 
 Images used in the notebooks are stored next to the notebooks and linked by their GitHub URL, because Colab does not resolve relative image paths.
+
+### Course package
+
+Helper functions used in the notebooks (e.g. `plot_decision_boundary`) are in the `data-science-concepts` package in `src/data_science_concepts`. The notebooks install it with
+
+```python
+%pip install -q "data-science-concepts==2026.*"
+import data_science_concepts as dsc
+```
+
+To release a new version, create a GitHub release with a tag of the form `vYEAR.MINOR.PATCH` (e.g. `v2026.0.1`). The `Package` workflow (`.github/workflows/package.yml`) builds the package and publishes it to [PyPI](https://pypi.org/project/data-science-concepts/); the version number is taken from the tag. Notebooks pin the course year, so a release for the next year (`v2027.0.0`) does not affect notebooks of the current year.
