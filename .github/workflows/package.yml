@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0  # tags are needed to determine the version
-      - uses: astral-sh/setup-uv@v10
+      - uses: astral-sh/setup-uv@v10.3.0  # setup-uv only publishes full version tags
       - run: uv build
       - name: Test the built package
         run: |
